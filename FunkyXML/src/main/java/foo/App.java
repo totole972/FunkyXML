@@ -4,10 +4,6 @@ import java.io.File;
 
 import net.sf.json.JSON;
 
-/**
- * Hello world!
- *
- */
 public class App {
 	
 	/**
