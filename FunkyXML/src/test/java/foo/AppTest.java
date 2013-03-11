@@ -28,14 +28,25 @@ public class AppTest
         return new TestSuite( AppTest.class );
     }
 
+
+    String jsonfile = "../../../test.json";
+    String xmlfile = JsonToXml.toxml(jsonfile);
+
+
     /**
      * Rigourous Test :-)
      */
+
+
+    public void testLectureJson()
+    {
+        assertTrue(xmlfile != null);
+    }
+
     public void testApp()
     {
-        String jsonfile = "../../../test.json";
-        String xmlfile = JsonToXml.toxml(jsonfile);
-        assertTrue(xmlfile != null);
+
+
         boolean isSavedxml = FileSaver.save("test.xml", xmlfile);
         assertTrue( isSavedxml);
     }
