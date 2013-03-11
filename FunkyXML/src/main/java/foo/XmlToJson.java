@@ -19,6 +19,7 @@ public class XmlToJson {
 			JSONObject jsonObject = XML.toJSONObject(xml);
 			return jsonObject.toString(4);
 		} catch (IOException e) {
+			System.err.format("IOException: %s%n", e);
 			return null;
 		}
 	}
