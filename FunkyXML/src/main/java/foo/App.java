@@ -16,12 +16,12 @@ public class App {
         else
         	System.out.println("C'est nul!");
 
-        String jsonfile = "../../../test.json";
+        /*String jsonfile = "../../../test.json";
         String xmlfile = JsonToXml.toxml(jsonfile);
         boolean isSavedxml = FileSaver.save("test.xml", xmlfile);
         if (isSavedxml)
             System.out.println("Conversion jsonxml ok!");
         else
-            System.out.println("Conversion jsonxml echec!");
+            System.out.println("Conversion jsonxml echec!"); */
     }
 }
