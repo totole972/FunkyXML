@@ -1,27 +1,25 @@
 package foo;
 
-import net.sf.json.JSON;
-
-/**
- * Hello world!
- *
- */
 public class App {
     public static void main(String[] args) {
-    	String xmlFileName = "blabla.xml";
-    	JSON json = XmlToJson.convert(xmlFileName);
-    	boolean isSaved = FileSaver.save("blabla.json", json.toString(2));
-        if (isSaved)
-        	System.out.println("Conversion optimale!");
+    	String xmlFileName = "quiz-moodle-exemple.xml";
+    	String jsonFileName = "quiz-moodle-exemple.json";
+    	
+    	String jsonContent = XmlToJson.convert(xmlFileName);
+    	boolean isSaved = FileSaver.save(jsonFileName, jsonContent);
+        if (isSaved) {
+        	System.out.println("XML -> JSON : Conversion optimale!");
+        	
+	        String xmlContent = JsonToXml.convert(jsonFileName);
+	        isSaved = FileSaver.save(xmlFileName, xmlContent);
+	        if (isSaved)
+	            System.out.println("JSON -> XML : Conversion jsonxml ok!");
+	        else
+	            System.out.println("JSON -> XML : Conversion jsonxml echec!");
+        }
         else
-        	System.out.println("C'est nul!");
+        	System.out.println("XML -> JSON : C'est nul!");
 
-        /*String jsonfile = "../../../test.json";
-        String xmlfile = JsonToXml.toxml(jsonfile);
-        boolean isSavedxml = FileSaver.save("test.xml", xmlfile);
-        if (isSavedxml)
-            System.out.println("Conversion jsonxml ok!");
-        else
-            System.out.println("Conversion jsonxml echec!"); */
+        /* */
     }
 }
