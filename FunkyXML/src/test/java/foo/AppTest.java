@@ -33,6 +33,10 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+        String jsonfile = "../../../test.json";
+        String xmlfile = JsonToXml.toxml(jsonfile);
+        assertTrue(xmlfile != null);
+        boolean isSavedxml = FileSaver.save("test.xml", xmlfile);
+        assertTrue( isSavedxml);
     }
 }

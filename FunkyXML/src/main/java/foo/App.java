@@ -2,11 +2,7 @@ package foo;
 
 import java.io.File;
 
-import javax.print.DocFlavor.STRING;
-
 import net.sf.json.JSON;
-import foo.FileSaver;
-import foo.XmlToJson;
 
 /**
  * Hello world!
@@ -35,7 +31,7 @@ public class App {
 			}else
 				output = json.toString();
 		}else if (args[0].toUpperCase().equals("JSON")){
-			output = null;
+			output = JsonToXml.toxml(InputFileName);
 		}
     	
 		//affichage ou sauvegarde
