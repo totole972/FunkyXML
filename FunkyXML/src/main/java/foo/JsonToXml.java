@@ -2,6 +2,7 @@ package foo;
 
 
 
+import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import net.sf.json.xml.XMLSerializer;
 import org.apache.commons.io.IOUtils;
@@ -15,6 +16,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import net.sf.json.JSONSerializer;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,6 +27,10 @@ import java.nio.file.Path;
  * To change this template use File | Settings | File Templates.
  */
 public class JsonToXml {
+    /**
+     * @param : origin , le chemin du fichier json à convertir
+     * @return String , renvoie une chaîne de caractères conrrespondant à la transposition en xml du fichier passé en paramètre
+     */
     public static String toxml(String origin)
     {
 
@@ -38,7 +45,7 @@ public class JsonToXml {
                 BufferedReader reader = Files.newBufferedReader(f.toPath(), StandardCharsets.UTF_8);
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    content+="\n"+line;
+                    content+=line;
                 }
             } catch (IOException x) {
                 System.err.format("IOException: %s%n", x);
@@ -50,8 +57,9 @@ public class JsonToXml {
             {
                 System.out.println("file exists");
             }      */
-            JSONObject json = JSONObject.fromObject(content);
-            XMLSerializer xs = new XMLSerializer();
+            //JSONObject json = JSONObject.fromObject(content);
+        JSON json = JSONSerializer.toJSON( content );
+        XMLSerializer xs = new XMLSerializer();
             String xml = xs.write(json);
             return xml;
 
