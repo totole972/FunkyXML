@@ -2,8 +2,6 @@ package foo;
 
 import java.io.File;
 
-import net.sf.json.JSON;
-
 public class App {
 	
 	/**
@@ -21,13 +19,9 @@ public class App {
 		String output = null;
 		
 		if (args[0].toUpperCase().equals("XML")){
-			JSON json = XmlToJson.convert(InputFileName);
-			if (json == null){
-				System.err.println("erreur dans la conversion du fichier");
-			}else
-				output = json.toString();
+			output = XmlToJson.convert(InputFileName).toString();
 		}else if (args[0].toUpperCase().equals("JSON")){
-			output = JsonToXml.toxml(InputFileName);
+			output = JsonToXml.convert(InputFileName);
 		}
     	
 		//affichage ou sauvegarde
