@@ -1,69 +1,41 @@
 package foo;
 
-
-
-import net.sf.json.JSON;
-import net.sf.json.JSONObject;
-import net.sf.json.xml.XMLSerializer;
-import org.apache.commons.io.IOUtils;
-
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import net.sf.json.JSONSerializer;
 
+import org.json.JSONObject;
+import org.json.XML;
 
 /**
- * Created with IntelliJ IDEA.
- * User: totole972
- * Date: 11/03/13
- * Time: 4:37 PM
- * To change this template use File | Settings | File Templates.
+ * Provide a JSON to XML converter.
+ * @version 2013-03-11
  */
-public class JsonToXml {
+public final class JsonToXml {
     /**
-     * @param : origin , le chemin du fichier json à convertir
-     * @return String , renvoie une chaîne de caractères conrrespondant à la transposition en xml du fichier passé en paramètre
+     * Empty private constructor (utility class).
      */
-    public static String toxml(String origin)
-    {
+    private JsonToXml() {
+    }
 
-            //Charset charset = Charset.forName("UTF_8");
-            //Path file = FileSystems.getDefault().getPath(origin);
-            File f = new File(origin);
-
-
-            String content="";
-
-            try {
-                BufferedReader reader = Files.newBufferedReader(f.toPath(), StandardCharsets.UTF_8);
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    content+=line;
-                }
-            } catch (IOException x) {
-                System.err.format("IOException: %s%n", x);
-                return null;
+    /**
+     * Convert a JSON file into an XML one, according to its path.
+     * @param jsonFile
+     *            Path of the JSON file.
+     * @return The content of the XML file.
+     */
+    public static String convert(final String jsonFile) {
+        try {
+            InputStream is = JsonToXml.class.getResourceAsStream(jsonFile);
+            int ptr = 0;
+            StringBuilder builder = new StringBuilder();
+            while ((ptr = is.read()) != -1) {
+                builder.append((char) ptr);
             }
-        System.out.println(content);
-            /*InputStream is = JsonToXml.class.getResourceAsStream(origin);
-            if(is.available()!=0)
-            {
-                System.out.println("file exists");
-            }      */
-            //JSONObject json = JSONObject.fromObject(content);
-        JSON json = JSONSerializer.toJSON( content );
-        XMLSerializer xs = new XMLSerializer();
-            String xml = xs.write(json);
-            return xml;
-
-
-
+            JSONObject jsonObject = new JSONObject(builder.toString());
+            return XML.toString(jsonObject);
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+            return null;
+        }
     }
 }
