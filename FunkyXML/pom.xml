@@ -53,6 +53,7 @@
 	           <rulesets>
 	               <ruleset>pmd-suppressions.xml</ruleset>
 	           </rulesets>
+	        </configuration>
   		</plugin>
   	</plugins>
   </build>
