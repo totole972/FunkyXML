@@ -45,8 +45,8 @@ public class AppTest extends TestCase {
     {
         boolean isSavedxml = FileSaver.save("/home/menestrel/test.xml", xmlfile);
         assertTrue(isSavedxml);
-        assertTrue(jsonfileconvert!=null);
-        boolean issavedjson = FileSaver.save("/home/menestrel/testjasonback.json",jsonfileconvert);
+        assertNotNull(jsonfileconvert);
+        boolean issavedjson = FileSaver.save("/home/menestrel/testjasonback.json", jsonfileconvert);
         assertTrue(issavedjson);
     }
 }
