@@ -1,4 +1,4 @@
-package IHM;
+package ihm;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -16,7 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import foo.FileSaver;
+import model.FileSaver;
+
 
 public class UserInterface {
 
@@ -171,7 +172,7 @@ public class UserInterface {
                         args[2] = args[1].substring(0,args[1].lastIndexOf('.')) + "converted.xml";
                         break;
                 }
-                if (!foo.App.checkParam(args)) {
+                if (!console.App.checkParam(args)) {
                     communicationField.setText("You've just chose a wrong file. <Expected: ."
                             + args[0] + ">");
                 }
@@ -179,10 +180,10 @@ public class UserInterface {
                     String output = null;
                     switch(converter) {
                         case XML_TO_JSON:
-                            output = foo.XmlToJson.convert(args[1]);
+                            output = model.XmlToJson.convert(args[1]);
                             break;
                         case JSON_TO_XML:
-                            output = foo.JsonToXml.convert(args[1]);
+                            output = model.JsonToXml.convert(args[1]);
                             break;
                     }
                     boolean isSaved = FileSaver.save(args[2], output);
