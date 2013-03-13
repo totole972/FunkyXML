@@ -40,11 +40,12 @@ public final class JsonToXml {
             File file = new File(jsonFile);
             String content = "";
             BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8);
+            StringBuffer buf = new StringBuffer();
             String line;
             while ((line = reader.readLine()) != null) {
-                content += "\n" + line;
+                buf.append("\n" + line);
             }
-            
+            content= buf.toString();
             // First step.
             JSONObject json = new JSONObject(content);
             String xmlContent = XML.toString(json);
