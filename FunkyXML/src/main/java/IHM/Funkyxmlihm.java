@@ -1,18 +1,14 @@
 package IHM;
+import foo.FileSaver;
+
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
-import javax.swing.JRadioButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -62,6 +58,7 @@ public class Funkyxmlihm {
 			public void actionPerformed(ActionEvent e) {
 				type=1;
 				System.out.println(type);
+
 			}
 		});
 		xmltojsonRadioButton.setBounds(51, 82, 127, 25);
@@ -104,7 +101,52 @@ public class Funkyxmlihm {
 		JButton btnNewButton = new JButton("Convert");
 		btnNewButton.setBounds(261, 369, 97, 25);
 		frmXmlToJson.getContentPane().add(btnNewButton);
-		
+
+        btnNewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                String[] args= new String[3];
+                args[1]=  pathField.getText();
+                switch(type)
+                {
+                    case 1 : args[0]="xml";
+                        args[2]=  args[1].substring(0,args[1].lastIndexOf('.'))+"convert.json";
+                        break;
+                    case 2 : args[0]="json";
+                        args[2]=  args[1].substring(0,args[1].lastIndexOf('.'))+"convert.xml";
+                        break;
+                    default : args[0]="0";
+                }
+                if(!foo.App.checkParam(args))
+                {
+                     textField_1.setText("Les paramètres sont erronés");
+                }
+                else
+                {
+                    String output = null;
+                    switch(type)
+                    {
+                        case 1 : output=foo.XmlToJson.convert(args[1]);
+                            break;
+                        case 2 : output=foo.JsonToXml.convert(args[1]);
+                            break;
+                        default : textField_1.setText("Les paramètres sont erronés");
+                    }
+                    boolean isSaved = FileSaver.save(args[2], output);
+                    if (!isSaved){
+                        textField_1.setText("erreur à l'ecriture du fichier! : " + args[2]);
+                        System.err.println("erreur à l'ecriture du fichier!");
+                        //System.out.println(output);
+                    }else
+                        JOptionPane.showMessageDialog(frmXmlToJson,"Réussite  l'ecriture du fichier! : " + args[2]);
+                        textField_1.setText(output);
+                        //System.out.println("ecriture du fichier reussi");
+                }
+
+
+            }
+        });
+
 		JButton btnNewButton_1 = new JButton("Select");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -121,5 +163,7 @@ public class Funkyxmlihm {
 		});
 		btnNewButton_1.setBounds(548, 276, 97, 25);
 		frmXmlToJson.getContentPane().add(btnNewButton_1);
+
+
 	}
 }
