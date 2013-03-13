@@ -12,7 +12,7 @@ public class AppTest extends TestCase {
     private String xmlfile = JsonToXml.convert(jsonfile);
     private String xmlsource = "/home/menestrel/test.xml";
     private String jsonfileconvert = XmlToJson.convert(xmlsource);
-    private String[] testargs = {"xml","/home/menestrel/test.json","/home/menestrel/test.xml"};
+    private String[] testargs = {"json","/home/menestrel/test.json","/home/menestrel/test.xml"};
 	
     /**
      * Create the test case
@@ -45,8 +45,8 @@ public class AppTest extends TestCase {
     {
         boolean isSavedxml = FileSaver.save("/home/menestrel/test.xml", xmlfile);
         assertTrue(isSavedxml);
-        assertTrue(jsonfileconvert!=null);
-        boolean issavedjson = FileSaver.save("/home/menestrel/testjasonback.json",jsonfileconvert);
+        assertNotNull(jsonfileconvert);
+        boolean issavedjson = FileSaver.save("/home/menestrel/testjasonback.json", jsonfileconvert);
         assertTrue(issavedjson);
     }
 }
