@@ -3,6 +3,7 @@ target
 .settings
 .classpath
 .project
+.metadata
 # intelliJ
 .idea	
 *.iml
