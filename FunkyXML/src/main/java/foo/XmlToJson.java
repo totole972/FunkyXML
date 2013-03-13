@@ -1,7 +1,10 @@
 package foo;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import org.json.JSONObject;
 import org.json.XML;
@@ -30,18 +33,19 @@ public final class XmlToJson {
      */
     public static String convert(final String xmlFile) {
         try {
-            InputStream is = XmlToJson.class.getResourceAsStream(xmlFile);
-            int ptr = 0;
-            StringBuilder builder = new StringBuilder();
-            while ((ptr = is.read()) != -1) {
-                builder.append((char) ptr);
+            File file = new File(xmlFile);
+            String content = "";
+            BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content += "\n" + line;
             }
-            String xml = builder.toString();
-            JSONObject jsonObject = XML.toJSONObject(xml);
+            JSONObject jsonObject = XML.toJSONObject(content);
             return jsonObject.toString(INDENT_SPACES_NUMBER);
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
             return null;
         }
+        
     }
 }
