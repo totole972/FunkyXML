@@ -35,7 +35,8 @@ public final class XmlToJson {
         try {
             File file = new File(xmlFile);
             String content = "";
-            BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8);
+            BufferedReader reader = Files.newBufferedReader(file.toPath(),
+                    StandardCharsets.UTF_8);
             String line;
             while ((line = reader.readLine()) != null) {
                 content += "\n" + line;
@@ -46,6 +47,5 @@ public final class XmlToJson {
             System.err.format("IOException: %s%n", e);
             return null;
         }
-        
     }
 }
